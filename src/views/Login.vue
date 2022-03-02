@@ -55,7 +55,7 @@ export default {
           if (response.data.success) {
             const { token, expired } = response.data;
             document.cookie = `jiangsToken=${token};expires=${new Date(expired)};`;
-            this.$router.push('/dashboard');
+            this.$router.push('/dashboard/products');
           }
         })
         .catch((error) => {
