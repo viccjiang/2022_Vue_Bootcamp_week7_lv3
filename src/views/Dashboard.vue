@@ -17,7 +17,7 @@ export default {
   components: {
     Navbar,
   },
-  mounted() {
+  created() {
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)jiangsToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
     console.log(token);
     this.$http.defaults.headers.common.Authorization = token;

@@ -40,6 +40,7 @@ export default {
         .post(api, this.user)
         .then((response) => {
           if (response.data.success) {
+            console.log('已登出');
             this.$router.push('/login');
           }
         })
