@@ -79,12 +79,12 @@ $dark:          $gray-900 !default;
 
 // scss-docs-start theme-colors-map
 $theme-colors: (
-  "primary":    #00cc99,
-  "secondary":  $secondary,
-  "success":    $success,
+  "primary":    #003354,
+  "secondary":  #DCDDDD, //$secondary,
+  "success":    #07c65c, //$success,
   "info":       $info,
-  "warning":    $warning,
-  "danger":     $danger,
+  "warning":    #FFE33F, // $warning,
+  "danger":     #EE847D, // $danger,
   "light":      $light,
   "dark":       $dark
 ) !default;
@@ -649,7 +649,7 @@ $small-font-size:             .875em !default;
 
 $sub-sup-font-size:           .75em !default;
 
-$text-muted:                  $gray-600 !default;
+$text-muted:                  #DCDDDD; //$gray-600 !default;
 
 $initialism-font-size:        $small-font-size !default;
 

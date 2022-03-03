@@ -1,7 +1,8 @@
 <template>
   <div class="text-end mt-4">
-    <button class="btn btn-primary" type="button"
-      @click="$refs.productModal.showModal()">建立新的產品</button>
+    <button class="btn btn-primary" type="button" @click="openModal">
+      建立新的產品
+    </button>
   </div>
   <table class="table mt-4">
     <thead>
@@ -37,7 +38,11 @@
       </tr>
     </tbody>
   </table>
-  <ProductModal ref="productModal"></ProductModal>
+  <ProductModal
+    ref="productModal"
+    :product="tempProduct"
+    @update-product="updateProduct"
+  ></ProductModal>
 </template>
 
 <script>
@@ -48,6 +53,7 @@ export default {
     return {
       products: [],
       pagination: {},
+      tempProduct: {},
     };
   },
   components: {
@@ -63,13 +69,28 @@ export default {
             console.log(response.data);
             this.products = response.data.products;
             this.pagination = response.data.pagination;
-            console.log(this.products, this.pagination);
+            // console.log(this.products, this.pagination);
           }
         })
         .catch((error) => {
           console.dir(error.response.data.message);
           this.$router.push('/login');
         });
+    },
+    openModal() {
+      this.tempProduct = {};
+      const productComponent = this.$refs.productModal;
+      productComponent.showModal();
+    },
+    updateProduct(item) {
+      this.tempProduct = item;
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product`;
+      const productComponent = this.$refs.productModal;
+      this.$http.post(api, { data: this.tempProduct }).then((response) => {
+        console.log(response);
+        productComponent.hideModal();
+        this.getProducts();
+      });
     },
   },
   mounted() {
