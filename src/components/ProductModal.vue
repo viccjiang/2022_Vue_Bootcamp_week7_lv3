@@ -49,41 +49,43 @@
               </div>
               <img class="img-fluid" :src="tempProduct.imageUrl" alt="" />
               <!-- 延伸技巧，多圖 -->
-              <div class="mt-5" v-if="tempProduct.images">
+              <div class="mt-5" v-if="tempProduct.imagesUrl">
                 <div
-                  v-for="(image, key) in tempProduct.images"
+                  v-for="(image, key) in tempProduct.imagesUrl"
                   class="mb-3 input-group"
                   :key="key"
                 >
                   <input
                     type="url"
                     class="form-control form-control"
-                    v-model="tempProduct.images[key]"
+                    v-model="tempProduct.imagesUrl[key]"
                     placeholder="請輸入連結"
                   />
+                  <img class="img-fluid" :src="tempProduct.imagesUrl[key]" alt="" />
                   <button
                     type="button"
                     class="btn btn-outline-danger"
-                    @click="tempProduct.images.splice(key, 1)"
+                    @click="tempProduct.imagesUrl.splice(key, 1)"
                   >
                     移除
                   </button>
                 </div>
                 <div
                   v-if="
-                    tempProduct.images[tempProduct.images.length - 1] ||
-                    !tempProduct.images.length
+                    tempProduct.imagesUrl[tempProduct.imagesUrl.length - 1] ||
+                    !tempProduct.imagesUrl.length
                   "
                 >
                   <button
                     class="btn btn-outline-primary btn-sm d-block w-100"
-                    @click="tempProduct.images.push('')"
+                    @click="tempProduct.imagesUrl.push('')"
                   >
                     新增圖片
                   </button>
                 </div>
               </div>
             </div>
+
             <div class="col-sm-8">
               <div class="mb-3">
                 <label for="title" class="form-label">標題</label>
@@ -222,7 +224,7 @@ export default {
   data() {
     return {
       modal: {},
-      tempProduct: {}, // 進行外層資料的接收 ( 單向數據流 ) 修改資料時使用的 ( 編輯資料 )
+      tempProduct: {}, // 進行外層資料的接收 ( 單向數據流 ) 修改資料時使用的 (編輯資料 )
     };
   },
   methods: {
@@ -231,6 +233,21 @@ export default {
     },
     hideModal() {
       this.modal.hide();
+    },
+    uploadFile() {
+      // 把上傳的檔案取出來
+      const uploadedFile = this.$refs.fileInput.files[0];
+      // console.dir(uploadedFile);
+      // 轉成 formData 格式
+      const formData = new FormData();
+      formData.append('file-to-upload', uploadedFile);
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/upload`;
+      this.$http.post(url, formData).then((response) => {
+        console.log(response.data);
+        if (response.data.success) {
+          this.tempProduct.imageUrl = response.data.imageUrl;
+        }
+      });
     },
   },
   mounted() {

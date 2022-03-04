@@ -19,8 +19,8 @@
       <tr v-for="item in products" :key="item.id">
         <td>{{ item.category }}</td>
         <td>{{ item.title }}</td>
-        <td class="text-end">{{ item.oringin_price }}</td>
-        <td class="text-end">{{ item.price }}</td>
+        <td class="text-right">{{ item.origin_price }}</td>
+        <td class="text-right">{{ item.price }}</td>
         <td>
           <span class="badge bg-success" v-if="item.is_enabled">上架中</span>
           <span class="badge bg-secondary" v-else>未上架</span>
