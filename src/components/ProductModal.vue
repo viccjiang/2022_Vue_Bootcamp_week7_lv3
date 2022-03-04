@@ -206,12 +206,14 @@
 import Modal from 'bootstrap/js/dist/modal';
 
 export default {
+  // 內層接收
   props: {
     product: {
       type: Object,
       default() { return {}; },
     },
   },
+  // 監聽 modal 內 product 內容是否更動
   watch: {
     product() {
       this.tempProduct = this.product;
@@ -220,7 +222,7 @@ export default {
   data() {
     return {
       modal: {},
-      tempProduct: {}, // 進行外層資料的接收 ( 單向數據流 )
+      tempProduct: {}, // 進行外層資料的接收 ( 單向數據流 ) 修改資料時使用的 ( 編輯資料 )
     };
   },
   methods: {

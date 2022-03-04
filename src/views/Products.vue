@@ -1,6 +1,6 @@
 <template>
   <div class="text-end mt-4">
-    <button class="btn btn-primary" type="button" @click="openModal">
+    <button class="btn btn-primary" type="button" @click="openModal(true)">
       建立新的產品
     </button>
   </div>
@@ -22,12 +22,14 @@
         <td class="text-end">{{ item.oringin_price }}</td>
         <td class="text-end">{{ item.price }}</td>
         <td>
-          <span class="text-success" v-if="item.is_enabled">上架中</span>
-          <span class="text-muted" v-else>未上架</span>
+          <span class="badge bg-success" v-if="item.is_enabled">上架中</span>
+          <span class="badge bg-secondary" v-else>未上架</span>
         </td>
         <td>
           <div class="btn-group">
-            <button type="button" class="btn btn-outline-primary btn-sm">
+            <button type="button" class="btn btn-outline-primary btn-sm"
+            @click="openModal(false, item)"
+            >
               編輯
             </button>
             <button type="button" class="btn btn-outline-danger btn-sm">
@@ -53,7 +55,8 @@ export default {
     return {
       products: [],
       pagination: {},
-      tempProduct: {},
+      tempProduct: {}, // 外層的 tempProduct 透過 props 傳送前內後外之後，元件內的 product 接收
+      isNew: false, // 判斷是否為新增
     };
   },
   components: {
@@ -77,20 +80,37 @@ export default {
           this.$router.push('/login');
         });
     },
-    openModal() {
-      this.tempProduct = {};
+    openModal(isNew, item) {
+      // console.log(isNew, item);
+      if (isNew) {
+        this.tempProduct = {};
+      } else {
+        this.tempProduct = { ...item }; // 用展開把資料取出來
+      }
+      this.isNew = isNew; // 把狀態存起來
       const productComponent = this.$refs.productModal;
-      productComponent.showModal();
+      productComponent.showModal(); // 再打開內層的 modal
     },
     updateProduct(item) {
       this.tempProduct = item;
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product`;
+      // 新增
+      let api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product`;
+      let httpMethod = 'post';
+      // 編輯 (用 isNew 來判斷新增或編輯) ( 若不是新增就要改變 api 路徑以及 httpMethod ) (取到產品 id 才有辦法編輯)
+      if (!this.isNew) {
+        api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/product/${item.id}`;
+        httpMethod = 'put';
+      }
       const productComponent = this.$refs.productModal;
-      this.$http.post(api, { data: this.tempProduct }).then((response) => {
-        console.log(response);
-        productComponent.hideModal();
-        this.getProducts();
-      });
+      this.$http[httpMethod](api, { data: this.tempProduct })
+        .then((response) => {
+          console.log(response);
+          productComponent.hideModal();
+          this.getProducts();
+        })
+        .catch((error) => {
+          console.dir(error.response.data.message);
+        });
     },
   },
   mounted() {
