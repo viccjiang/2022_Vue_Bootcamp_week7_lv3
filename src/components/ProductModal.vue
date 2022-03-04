@@ -206,7 +206,7 @@
 
 <script>
 // import Modal from 'bootstrap/js/dist/modal';
-import modalMixin from '@/mixins/modalMixin';
+import modalMixin from '../mixins/modalMixin';
 
 export default {
   // 內層接收
