@@ -17,7 +17,7 @@
           <button type="button" class="btn btn-outline-secondary"
                   data-bs-dismiss="modal">取消
           </button>
-          <button type="button" class="btn btn-danger"
+          <button type="button" class="btn btn-outline-danger "
                   @click="$emit('del-item')">確認刪除
           </button>
         </div>
@@ -26,9 +26,9 @@
   </div>
 </template>
 
-
 <script>
 import modalMixin from '@/mixins/modalMixin';
+
 export default {
   props: {
     item: {},

@@ -132,7 +132,7 @@ export default {
     },
   },
   mounted() {
-    // 重新整理頁面後，跳出請重新登入。Cookie 內是有 token 的，不過還是跳出重新登入。
+    // 重新整理頁面後，跳出請重新登入。Cookie 內是有 token 的，不過還是跳出重新登入。 解法式 dashboard 改成 created
     this.getProducts();
   },
 };
