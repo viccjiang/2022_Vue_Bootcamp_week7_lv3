@@ -205,7 +205,8 @@
 </template>
 
 <script>
-import Modal from 'bootstrap/js/dist/modal';
+// import Modal from 'bootstrap/js/dist/modal';
+import modalMixin from '@/mixins/modalMixin';
 
 export default {
   // 內層接收
@@ -228,12 +229,12 @@ export default {
     };
   },
   methods: {
-    showModal() {
-      this.modal.show();
-    },
-    hideModal() {
-      this.modal.hide();
-    },
+    // showModal() {
+    //   this.modal.show();
+    // },
+    // hideModal() {
+    //   this.modal.hide();
+    // },
     uploadFile() {
       // 把上傳的檔案取出來
       const uploadedFile = this.$refs.fileInput.files[0];
@@ -250,8 +251,9 @@ export default {
       });
     },
   },
-  mounted() {
-    this.modal = new Modal(this.$refs.modal);
-  },
+  // mounted() {
+  //   this.modal = new Modal(this.$refs.modal);
+  // },
+  mixins: [modalMixin],
 };
 </script>
