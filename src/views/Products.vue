@@ -1,4 +1,5 @@
 <template>
+  <Loading :active="isLoading"></Loading>
   <div class="text-end mt-4">
     <button class="btn btn-primary" type="button" @click="openModal(true)">
       建立新的產品
@@ -27,13 +28,19 @@
         </td>
         <td>
           <div class="btn-group">
-            <button type="button" class="btn btn-outline-primary btn-sm"
-            @click="openModal(false, item)"
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-sm"
+              @click="openModal(false, item)"
             >
               編輯
             </button>
-            <button class="btn btn-outline-danger btn-sm"
-            @click="openDelProductModal(item)">刪除</button>
+            <button
+              class="btn btn-outline-danger btn-sm"
+              @click="openDelProductModal(item)"
+            >
+              刪除
+            </button>
           </div>
         </td>
       </tr>
@@ -44,7 +51,7 @@
     :product="tempProduct"
     @update-product="updateProduct"
   ></ProductModal>
-  <DelModal :item="tempProduct" ref="delModal" @del-item="delProduct"/>
+  <DelModal :item="tempProduct" ref="delModal" @del-item="delProduct" />
 </template>
 
 <script>
@@ -59,18 +66,22 @@ export default {
       pagination: {},
       tempProduct: {}, // 外層的 tempProduct 透過 props 傳送前內後外之後，元件內的 product 接收
       isNew: false, // 判斷是否為新增
+      isLoading: false, // 判斷是否 louding 狀態
     };
   },
   components: {
     ProductModal,
     DelModal,
   },
+  inject: ['emitter'],
   methods: {
     getProducts() {
       const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products`;
+      this.isLoading = true; // 尚未取得商品前 loading 狀態
       this.$http
         .get(api)
         .then((response) => {
+          this.isLoading = false; // 取得商品 loading 關閉
           if (response.data.success) {
             console.log(response.data);
             this.products = response.data.products;
@@ -109,10 +120,23 @@ export default {
         .then((response) => {
           console.log(response);
           productComponent.hideModal();
-          this.getProducts();
+          // this.getProducts();
+          if (response.data.success) {
+            this.getProducts();
+            this.emitter.emit('push-message', {
+              style: 'success',
+              title: '更新成功',
+            });
+          } else {
+            this.emitter.emit('push-message', {
+              style: 'danger',
+              title: '更新失敗',
+              content: response.data.message.join('、'),
+            });
+          }
         })
         .catch((error) => {
-          console.dir(error.response.data.message);
+          console.dir(error);
         });
     },
     // 開啟刪除 Modal
