@@ -11,8 +11,10 @@
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
         <div class="modal-header bg-primary text-white">
-          <h5 class="modal-title" id="exampleModalLabel">
-            <span>新增產品</span>
+          <h5 id="productModalLabel" class="modal-title">
+            <!-- modal 依照傳進來的值做標題切換 -->
+            <span v-if="isNew">新增產品</span>
+            <span v-else>編輯產品</span>
           </h5>
           <button
             type="button"
@@ -49,40 +51,44 @@
               </div>
               <img class="img-fluid" :src="tempProduct.imageUrl" alt="" />
               <!-- 延伸技巧，多圖 -->
-              <div class="mt-5" v-if="tempProduct.imagesUrl">
-                <div
-                  v-for="(image, key) in tempProduct.imagesUrl"
-                  class="mb-3 input-group"
-                  :key="key"
-                >
-                  <input
-                    type="url"
-                    class="form-control form-control"
-                    v-model="tempProduct.imagesUrl[key]"
-                    placeholder="請輸入連結"
-                  />
-                  <img class="img-fluid" :src="tempProduct.imagesUrl[key]" alt="" />
-                  <button
-                    type="button"
-                    class="btn btn-outline-danger"
-                    @click="tempProduct.imagesUrl.splice(key, 1)"
-                  >
-                    移除
-                  </button>
-                </div>
-                <div
-                  v-if="
-                    tempProduct.imagesUrl[tempProduct.imagesUrl.length - 1] ||
-                    !tempProduct.imagesUrl.length
-                  "
-                >
-                  <button
-                    class="btn btn-outline-primary btn-sm d-block w-100"
-                    @click="tempProduct.imagesUrl.push('')"
-                  >
+              <!-- 陣列 的判斷方式 ，如果是陣列才會跑判斷迴圈 -->
+              <div v-if="Array.isArray(tempProduct.imagesUrl)">
+                <template class="mb-1" v-for="(image, key) in tempProduct.imagesUrl" :key="key">
+                  <div class="mb-3">
+                    <label for="imageUrl" class="form-label">圖片網址</label>
+                    <input v-model="tempProduct.imagesUrl[key]" type="text" class="form-control"
+                      placeholder="請輸入圖片連結">
+                  </div>
+                  <img class="img-fluid" :src="image">
+                </template>
+                <!-- 圖片區按鈕 -->
+                <!-- 先判斷陣列內 有沒有第一個元素 如果沒有的話要新增一個
+                  這個意思是 如果都沒有的話 新增一個
+                  如果有要判斷(特定索引位置)裡面有沒有字，有字的話跑出新增下一個
+                  索引位置帶入(最後一個就是length-1) -->
+                <div v-if="!tempProduct.imagesUrl.length ||
+                tempProduct.imagesUrl[tempProduct.imagesUrl.length - 1]">
+                  <!-- 陣列新增 -->
+                  <button class="btn btn-outline-primary btn-sm d-block w-100"
+                    @click="tempProduct.imagesUrl.push('')">
                     新增圖片
                   </button>
                 </div>
+                <div v-else>
+                  <!-- 陣列刪除 pop -->
+                  <button class="btn btn-outline-danger btn-sm d-block w-100"
+                  @click="tempProduct.imagesUrl.pop()">
+                    刪除圖片
+                  </button>
+                </div>
+              </div>
+              <!-- 這裡的 if / else 對應是 Array.isArray 這個判斷式，
+              所以這裡的意思是指，若不是陣列的話，直接跑 createImages 這個方法嗎 ?
+              直接給空陣列 [] 並且新增 push 空陣列 ，請問助教的寫法是這個意思嗎 ? -->
+              <div v-else>
+                <button class="btn btn-outline-primary btn-sm d-block w-100" @click="createImages">
+                  新增圖片
+                </button>
               </div>
             </div>
 
@@ -215,7 +221,13 @@ export default {
       type: Object,
       default() { return {}; },
     },
+    isNew: {
+      type: Boolean,
+      default: false,
+    },
   },
+  emits: ['update-product'],
+  inject: ['emitter'],
   // 監聽 modal 內 product 內容是否更動
   watch: {
     product() {
@@ -225,7 +237,9 @@ export default {
   data() {
     return {
       modal: {},
-      tempProduct: {}, // 進行外層資料的接收 ( 單向數據流 ) 修改資料時使用的 (編輯資料 )
+      tempProduct: {
+        imagesUrl: [],
+      }, // 進行外層資料的接收 ( 單向數據流 ) 修改資料時使用的 (編輯資料 )
     };
   },
   methods: {
@@ -249,6 +263,10 @@ export default {
           this.tempProduct.imageUrl = response.data.imageUrl;
         }
       });
+    },
+    createImages() {
+      this.tempProduct.imagesUrl = [];
+      this.tempProduct.imagesUrl.push('');
     },
   },
   // mounted() {

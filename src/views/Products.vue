@@ -46,6 +46,8 @@
       </tr>
     </tbody>
   </table>
+   <Pagination :pages="pagination"
+    @emit-pages="getProducts"></Pagination>
   <ProductModal
     ref="productModal"
     :product="tempProduct"
@@ -57,6 +59,7 @@
 <script>
 // import ProductModal from '../components/ProductModal.vue';
 import ProductModal from '@/components/ProductModal.vue';
+import Pagination from '@/components/Pagination.vue';
 import DelModal from '@/components/DelModal.vue';
 
 export default {
@@ -72,11 +75,12 @@ export default {
   components: {
     ProductModal,
     DelModal,
+    Pagination,
   },
   inject: ['emitter'],
   methods: {
-    getProducts() {
-      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products`;
+    getProducts(page = 1) {
+      const api = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`;
       this.isLoading = true; // 尚未取得商品前 loading 狀態
       this.$http
         .get(api)
