@@ -1,59 +1,64 @@
 <template>
-  <Loading :active="isLoading"></Loading>
-  <div class="text-end mt-4">
-    <button class="btn btn-primary" type="button" @click="openModal(true)">
-      建立新的產品
-    </button>
+  <div class="container">
+    <Loading :active="isLoading"></Loading>
+    <div class="text-end mt-4">
+      <button class="btn btn-primary" type="button" @click="openModal(true)">
+        建立新的產品
+      </button>
+    </div>
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th width="120">分類</th>
+          <th>產品名稱</th>
+          <th width="120">原價</th>
+          <th width="120">售價</th>
+          <th width="100">是否上架</th>
+          <th width="120">編輯</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in products" :key="item.id">
+          <td>{{ item.category }}</td>
+          <td>{{ item.title }}</td>
+          <td class="text-right">{{ $filters.currency(item.origin_price) }}</td>
+          <td class="text-right">{{ $filters.currency(item.price) }}</td>
+          <td>
+            <span class="badge bg-success" v-if="item.is_enabled">上架中</span>
+            <span class="badge bg-secondary" v-else>未上架</span>
+          </td>
+          <td>
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-outline-primary btn-sm"
+                @click="openModal(false, item)"
+              >
+                編輯
+              </button>
+              <button
+                class="btn btn-outline-danger btn-sm"
+                @click="openDelProductModal(item)"
+              >
+                刪除
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- props，前內後外，pages內接收，pagination外層傳 -->
+    <!-- emit，前內後外，emit-pages內事件名稱，getProducts觸發外函式 -->
+    <Pagination :pages="pagination"
+      @emit-pages="getProducts"></Pagination>
+    <ProductModal
+      ref="productModal"
+      :product="tempProduct"
+      @update-product="updateProduct"
+      :is-new="isNew"
+    ></ProductModal>
+    <DelModal :item="tempProduct" ref="delModal" @del-item="delProduct" />
   </div>
-  <table class="table mt-4">
-    <thead>
-      <tr>
-        <th width="120">分類</th>
-        <th>產品名稱</th>
-        <th width="120">原價</th>
-        <th width="120">售價</th>
-        <th width="100">是否上架</th>
-        <th width="120">編輯</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="item in products" :key="item.id">
-        <td>{{ item.category }}</td>
-        <td>{{ item.title }}</td>
-        <td class="text-right">{{ item.origin_price }}</td>
-        <td class="text-right">{{ item.price }}</td>
-        <td>
-          <span class="badge bg-success" v-if="item.is_enabled">上架中</span>
-          <span class="badge bg-secondary" v-else>未上架</span>
-        </td>
-        <td>
-          <div class="btn-group">
-            <button
-              type="button"
-              class="btn btn-outline-primary btn-sm"
-              @click="openModal(false, item)"
-            >
-              編輯
-            </button>
-            <button
-              class="btn btn-outline-danger btn-sm"
-              @click="openDelProductModal(item)"
-            >
-              刪除
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-   <Pagination :pages="pagination"
-    @emit-pages="getProducts"></Pagination>
-  <ProductModal
-    ref="productModal"
-    :product="tempProduct"
-    @update-product="updateProduct"
-  ></ProductModal>
-  <DelModal :item="tempProduct" ref="delModal" @del-item="delProduct" />
 </template>
 
 <script>
@@ -131,16 +136,15 @@ export default {
               style: 'success',
               title: '更新成功',
             });
-          } else {
-            this.emitter.emit('push-message', {
-              style: 'danger',
-              title: '更新失敗',
-              content: response.data.message.join('、'),
-            });
           }
         })
         .catch((error) => {
-          console.dir(error);
+          // console.dir(error);
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '更新失敗',
+            content: error.response.data.message.join('、'),
+          });
         });
     },
     // 開啟刪除 Modal
