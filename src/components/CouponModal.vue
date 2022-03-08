@@ -4,7 +4,10 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">優惠券</h5>
+          <h5 class="modal-title" id="exampleModalLabel">
+            <span v-if="isNew">新增優惠券</span>
+            <span v-else>編輯產優惠券</span>
+            </h5>
           <button type="button" class="btn-close"
                   data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -59,6 +62,10 @@ export default {
   name: 'couponModal',
   props: {
     coupon: {},
+    isNew: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
