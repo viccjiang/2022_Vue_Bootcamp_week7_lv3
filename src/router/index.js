@@ -4,12 +4,34 @@ import Home from '../views/Home.vue';
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    component: () => import('../views/FrontView.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Home',
+        component: Home,
+      },
+      {
+        path: 'about',
+        component: () => import('../views/UserAbout.vue'),
+      },
+      {
+        path: 'products',
+        component: () => import('../views/UserProducts.vue'),
+      },
+      {
+        path: 'product/:id',
+        component: () => import('../views/UserProductDetail.vue'),
+      },
+      {
+        path: 'cart',
+        component: () => import('../views/UserCart.vue'),
+      },
+    ],
   },
   {
     path: '/about',
-    component: () => import('../views/About.vue'),
+    component: () => import('../views/UserAbout.vue'),
   },
   {
     path: '/login',

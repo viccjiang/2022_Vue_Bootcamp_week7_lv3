@@ -19,6 +19,7 @@ export default {
   props: [
     'msg',
   ],
+  inject: ['emitter'],
   mounted() {
     const toastEl = this.$refs.toast;
     const toast = new Toast(toastEl, {
