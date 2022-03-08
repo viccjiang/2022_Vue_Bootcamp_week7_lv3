@@ -80,9 +80,9 @@ $dark:          $gray-900 !default;
 // scss-docs-start theme-colors-map
 $theme-colors: (
   "primary":    #003354,
-  "secondary":  #DCDDDD, //$secondary,
+  "secondary":  $secondary, // #DCDDDD, 
   "success":    #07c65c, //$success,
-  "info":       $info,
+  "info":       #A1D6D3, //$info,
   "warning":    #FFE33F, // $warning,
   "danger":     #EE847D, // $danger,
   "light":      $light,
@@ -338,9 +338,9 @@ $escaped-characters: (
 // Quickly modify global styling by enabling or disabling optional features.
 
 $enable-caret:                true !default;
-$enable-rounded:              true !default;
-$enable-shadows:              false !default;
-$enable-gradients:            false !default;
+$enable-rounded:              false !default;
+$enable-shadows:              true !default;
+$enable-gradients:            true !default;
 $enable-transitions:          true !default;
 $enable-reduced-motion:       true !default;
 $enable-smooth-scroll:        true !default;
