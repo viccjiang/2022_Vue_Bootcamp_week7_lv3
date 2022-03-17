@@ -173,7 +173,7 @@
         </div>
       </div>
     </div>
-    <swiper :slides-per-view="1" :space-between="50">
+    <swiper :slides-per-view="1" :space-between="50" class="mySwiper">
     <swiper-slide v-for="item in products" :key="item.id">
       <div
         style="
