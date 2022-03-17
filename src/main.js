@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import AOS from 'aos';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueLoading from 'vue-loading-overlay';
@@ -9,6 +10,7 @@ import App from './App.vue';
 import router from './router';
 import { currency, date } from './methods/filters';
 import $httpMessageState from './methods/pushMessageState';
+import 'aos/dist/aos.css';
 
 const app = createApp(App);
 app.config.globalProperties.$filters = {
@@ -17,6 +19,7 @@ app.config.globalProperties.$filters = {
 };
 // 此函式的用途是整合 Ajax 的錯誤事件，統一整理發送給予 Toast 處理
 app.config.globalProperties.$httpMessageState = $httpMessageState;
+app.use(AOS);
 app.use(VueAxios, axios);
 app.use(router);
 app.component('Loading', VueLoading);
