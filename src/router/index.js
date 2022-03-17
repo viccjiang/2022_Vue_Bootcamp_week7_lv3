@@ -31,6 +31,10 @@ const routes = [
         name: 'cart',
         component: () => import('../views/UserCart.vue'),
       },
+      {
+        path: 'swiper',
+        component: () => import('../views/SwiperTest.vue'),
+      },
     ],
   },
   {

@@ -14,7 +14,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav d-flex align-items-center me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav d-flex align-items-center justify-content-center me-auto mb-2 mb-lg-0">
           <!-- <li class="nav-item">
             <router-link class="nav-link" to="/">首頁</router-link>
           </li> -->
@@ -79,14 +79,14 @@ export default {
       this.$http
         .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`)
         .then((res) => {
-          console.log('cart:', res);
+          console.log('購物車:', res);
           this.cartData = res.data.data;
         });
     },
   },
   mounted() {
     this.getCart();
-    emitter.on('get-cart', () => {
+    emitter.on('update-cart', () => {
       this.getCart();
     });
   },

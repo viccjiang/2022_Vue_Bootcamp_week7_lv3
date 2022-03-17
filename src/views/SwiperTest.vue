@@ -1,5 +1,17 @@
 <template>
   <Loading :active="isLoading"></Loading>
+  <swiper
+    :slides-per-view="1"
+    :space-between="50"
+  >
+    <swiper-slide v-for="item in products" :key="item.id">
+      <div
+      style="height:300px; background-position: center center; background-size: cover"
+      :style="{backgroundImage: `url(${item.imageUrl})`}"
+      >
+      </div>
+    </swiper-slide>
+  </swiper>
   <div class="container">
     <div class="row">
       <!-- 左側分類欄 -->
@@ -117,8 +129,11 @@
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue';
 import emitter from '@/methods/emitter';
 import Pagination from '../components/Pagination.vue';
+
+import 'swiper/swiper.scss'; // core Swiper
 // LocalStorage
 // 轉型
 const storageMethods = {
@@ -147,6 +162,8 @@ export default {
   },
   components: {
     Pagination,
+    Swiper,
+    SwiperSlide,
   },
   provide() {
     return {

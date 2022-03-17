@@ -1,67 +1,25 @@
 <template>
+<Loading :active="isLoading"></Loading>
   <div class="container">
     <h2>購物車</h2>
-    <table class="table align-middle">
-      <thead>
-        <tr>
-          <th>圖片</th>
-          <th>商品名稱</th>
-          <th>價格</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="product in products" :key="product.id">
-          <td style="width: 200px">
-            <div
-              :style="{
-                backgroundImage: `url(${product.imageUrl})`,
-              }"
-              style="
-                height: 100px;
-                background-size: cover;
-                background-position: center;
-              "
-            ></div>
-          </td>
-          <td>{{ product.title }}</td>
-          <td>
-            <div class="h5" v-if="product.price === product.origin_price">
-              {{ product.price }} 元
-            </div>
-            <div v-else>
-              <del class="h6">原價 {{ product.origin_price }} 元</del>
-              <div class="h5">現在只要 {{ product.price }} 元</div>
-            </div>
-          </td>
-          <td>
-            <div class="btn-group btn-group-sm">
-              <button
-                type="button"
-                class="btn btn-outline-secondary"
-                :disabled="isLoadingItem === product.id"
-                @click="openProductModal(product.id)"
-              >
-                查看更多
-              </button>
-              <button
-                type="button"
-                class="btn btn-danger"
-                @click="addToCart(product.id)"
-                :disabled="isLoadingItem === product.id"
-              >
-                <span
-                  class="spinner-grow spinner-grow-sm"
-                  v-show="isLoadingItem === product.id"
-                ></span>
-                加到購物車
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <!-- 購物車列表 -->
+    <div class="row p-3">
+      <ul class="steps row g-0 list-unstyled mb-4">
+        <li class="col-4 border">
+          <small class="ls-3">STEP1</small>
+          <span>確認訂單</span>
+        </li>
+        <li class="col-4 border">
+          <small class="ls-3">STEP2</small>
+          <span>建立訂單</span>
+        </li>
+        <li class="col-4 border">
+          <small class="ls-3">STEP3</small>
+          <span>完成訂單</span>
+        </li>
+      </ul>
+    </div>
+    <p>總共{{cartData.carts.length}} 筆項目 </p>
+    {{ cartData.carts }}
   </div>
 </template>
 
@@ -71,18 +29,23 @@ import emitter from '../methods/emitter';
 export default {
   data() {
     return {
-      cartData: {},
+      cartData: {
+        carts: {},
+      },
       products: [],
       isLoadingItem: '',
+      isLoading: false,
     };
   },
   methods: {
-    getProducts() {
+    getCarts() {
+      this.isLoading = true;
       this.$http
-        .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`)
+        .get(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`)
         .then((res) => {
+          this.isLoading = false;
           console.log(res);
-          this.products = res.data.products;
+          this.cartData = res.data.data;
         });
     },
     addToCart(id, qty = 1) {
@@ -102,7 +65,7 @@ export default {
     },
   },
   mounted() {
-    this.getProducts();
+    this.getCarts();
   },
 };
 </script>

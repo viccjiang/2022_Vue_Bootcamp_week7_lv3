@@ -3,16 +3,21 @@
     <div id="carouselExampleCaptions" class="" data-bs-ride="carousel">
       <div class=""></div>
       <div class="carousel-inner">
-        <div class="carousel-item active ">
+        <div class="carousel-item active">
           <div
             class="card-img-top"
-            style="height: 80vh; background-image: url(https://images.unsplash.com/photo-1519974719765-e6559eac2575?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80);
-          background-size: cover;
-          background-position:bottom center;
-          "
+            style="
+              height: 80vh;
+              background-image: url(https://images.unsplash.com/photo-1519974719765-e6559eac2575?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80);
+              background-size: cover;
+              background-position: bottom center;
+            "
           ></div>
-          <div class="carousel-caption  d-md-block pb-5">
-            <h1 style=" text-shadow: black 0em 0em 0.1em " class="indexBannerText mb-3">
+          <div class="carousel-caption d-md-block pb-5">
+            <h1
+              style="text-shadow: black 0em 0em 0.1em"
+              class="indexBannerText mb-3"
+            >
               讓你的居家生活風格更加獨特
             </h1>
             <p style="text-shadow: black 0em 0em 0.1em" class="mb-4 fs-5 text">
@@ -20,7 +25,7 @@
             </p>
 
             <router-link to="/products">
-              <button type="button" class="btn btn-light  mt-2 py-3 px-5">
+              <button type="button" class="btn btn-light mt-2 py-3 px-5">
                 SHOP NOW
               </button>
             </router-link>
@@ -44,7 +49,16 @@
                 簡約風格打造你的工作環境，讓生活更簡單！
               </p>
               <router-link to="/products">
-                <button type="button" class="btn btn-outline-secondary  mt-4 py-2 px-5 stretched-link">
+                <button
+                  type="button"
+                  class="
+                    btn btn-outline-secondary
+                    mt-4
+                    py-2
+                    px-5
+                    stretched-link
+                  "
+                >
                   立即前往
                 </button>
               </router-link>
@@ -66,7 +80,16 @@
               </p>
 
               <router-link to="/products">
-                <button type="button" class="btn btn-outline-secondary  mt-4 py-2 px-5 stretched-link">
+                <button
+                  type="button"
+                  class="
+                    btn btn-outline-secondary
+                    mt-4
+                    py-2
+                    px-5
+                    stretched-link
+                  "
+                >
                   立即前往
                 </button>
               </router-link>
@@ -88,7 +111,16 @@
               </p>
 
               <router-link to="/products">
-                <button type="button" class="btn btn-outline-secondary  mt-4 py-2 px-5 stretched-link">
+                <button
+                  type="button"
+                  class="
+                    btn btn-outline-secondary
+                    mt-4
+                    py-2
+                    px-5
+                    stretched-link
+                  "
+                >
                   立即前往
                 </button>
               </router-link>
@@ -97,8 +129,7 @@
         </div>
       </div>
     </div>
-
-    <div class="bg-light mt-4 mb-4 p-4 ">
+    <div class="bg-light mt-4 mb-4 p-4">
       <div class="container">
         <div id="carouselExampleControls" class="slide" data-ride="carousel">
           <div class="carousel-inner">
@@ -106,43 +137,21 @@
               <div class="row justify-content-center py-4">
                 <div class="col-md-6 text-center py-3">
                   <h3>re.HOUSE，Make Life Easier</h3>
-                  <div class="textarea my-3 text-secondary" style="line-hight=1.5;">
+                  <div
+                    class="textarea my-3 text-secondary"
+                    style="line-hight=1.5;"
+                  >
                     <p>我們都對美好生活有著無限憧憬，</p>
                     <p>偶爾需要來點療癒的事物來妝點你的生活質感，</p>
                     <p>家，打造美好居家生活的起點，</p>
                     <p>re.HOUSE 帶你進入美好生活，</p>
                     <p>幫你找到最適合的傢俱，讓你享受每一刻精彩。</p>
                   </div>
-                  <p><small>—  re.HOUSE，您的居家最佳夥伴  —</small></p>
+                  <p><small>— re.HOUSE，您的居家最佳夥伴 —</small></p>
                 </div>
               </div>
             </div>
-            <div class="carousel-item">
-              <div class="row justify-content-center py-5">
-                <div class="col-md-6 text-center">
-                  <h3>Lorem ipsum.</h3>
-                  <p class="my-5">
-                    “Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                    tempor invidunt ut labore et dolore magna aliquyam erat.”
-                  </p>
-                  <p><small>—Lorem ipsum dolor sit amet.—</small></p>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="row justify-content-center py-5">
-                <div class="col-md-6 text-center">
-                  <h3>Lorem ipsum.</h3>
-                  <p class="my-5">
-                    “Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                    tempor invidunt ut labore et dolore magna aliquyam erat.”
-                  </p>
-                  <p><small>—Lorem ipsum dolor sit amet.—</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- <a
+            <!-- <a
             class="carousel-control-prev"
             href="#carouselExampleControls"
             role="button"
@@ -160,9 +169,54 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a> -->
+          </div>
         </div>
       </div>
     </div>
+
+    <swiper :slides-per-view="1" :space-between="50">
+    <swiper-slide v-for="item in products" :key="item.id">
+      <div
+        style="
+          height: 300px;
+          background-position: center center;
+          background-size: cover;
+        "
+        :style="{ backgroundImage: `url(${item.imageUrl})` }"
+      ></div>
+    </swiper-slide>
+  </swiper>
+
+  <section class="intro bg-light pt-10 pt-lg-18 pb-14 pb-lg-18">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-12 col-md-6 col-lg-6  mb-2">
+        <h3 class="fs-lg-3 text-secondary text-md-center text-lg-start fw-medium mb-1">精心設計、課程多元</h3>
+        <p class="text-primary fs-5 mb-md-7">教師帶領多元課程，釋放壓力，與身心常見的緊繃不適溫柔和解。</p>
+        <a class="btn-hover-opacity text-secondary" href="./surroungings.html">課程介紹 </a>
+        <!-- <span class=" text-secondary material-icons">
+          arrow_right_alt
+        </span> -->
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <swiper class="swiper mySwiper " :modules="modules">
+            <swiper-slide  class="ratio ratio-1x1" v-for="item in products" :key="item.id">
+              <div
+                style="
+                  height: 300px;
+                  background-position: center center;
+                  background-size: cover;
+                "
+                :style="{ backgroundImage: `url(${item.imageUrl})` }"
+              ></div>
+              <!-- <a href="#"><img src="" class="img-hover h-100 card-img"
+                  alt="yoga"></a> -->
+            </swiper-slide >
+        </swiper>
+      </div>
+    </div>
+  </div>
+</section>
     <div class="container my-7 mb-4">
       <div class="row">
         <div class="col-md-6 g-0">
@@ -180,10 +234,10 @@
           </p>
         </div>
       </div>
-      <div class="row flex-row-reverse justify-content-between ">
+      <div class="row flex-row-reverse justify-content-between">
         <div class="col-md-6 g-0">
           <img
-            src="https://images.unsplash.com/photo-1486591038957-19e7c73bdc41?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80"
+            src="https://images.unsplash.com/photo-1571570703598-39eb580a0329?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80"
             alt=""
             class="img-fluid"
           />
@@ -249,59 +303,64 @@
         </div>
       </div>
     </div> -->
-
-    <footer class="bg-dark py-4 py-md-5 text-light">
-      <div class="container row g-0 mx-auto px-3 fs-7 ls-2
-        text-secondary text-center">
-        <div><router-link class="navbar-brand brandlogo link-light me-0" to="/"><span class="brandlogos">re.</span>HOUSE </router-link></div>
-        <div class="mt-3">本網站僅供個人作品使用，不提供商業用途 <span class="d-none d-md-inline-block"><router-link class="p-0 nav-link link-secondary" to="/login">｜登入後台</router-link> </span></div>
-        <div class="mt-3">© 2022 re.HOUSE COPYRIGHT</div>
-        <ul class="d-flex  justify-content-center list-unstyled mt-3 mb-0 h4">
-          <li>
-            <a href="#" class="text-white mx-3"><i class="bi bi-github"></i></a>
-          </li>
-          <li>
-            <a href="#" class="text-white mx-3"><i class="bi bi-instagram"></i></a>
-          </li>
-          <li>
-            <a href="#" class="text-white ms-3"><i class="bi bi-messenger"></i></a>
-          </li>
-        </ul>
-      </div>
-    </footer>
-
   </section>
 </template>
 
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
+import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue';
+import 'swiper/swiper.scss'; // core Swiper
 
 export default {
-  name: 'Home',
-  // components: {
-  //   HelloWorld,
+  data() {
+    return {
+      products: [],
+    };
+  },
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+  methods: {
+    getProducts(page = 1) {
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/?page=${page}`;
+      this.isLoading = true;
+      this.$http.get(url).then((response) => {
+        this.products = response.data.products;
+        console.log('products:', response);
+        this.isLoading = false;
+        if (response.data.success) {
+          console.log(response.data);
+          this.products = response.data.products;
+          this.pagination = response.data.pagination;
+        }
+      });
+    },
+  },
+  // getProduct(id) {
+  //   this.$router.push(`/product/${id}`);
   // },
-  created() {
+  mounted() {
+    this.getProducts();
     console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH);
   },
 };
 </script>
 
-<style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Expletus+Sans:ital,wght@0,400;0,600;0,700;1,500;1,600&display=swap');
+<style lang='scss'>
+@import url("https://fonts.googleapis.com/css2?family=Expletus+Sans:ital,wght@0,400;0,600;0,700;1,500;1,600&display=swap");
 
-.brandlogo{
-  font-family:'Expletus Sans', cursive;
-  font-weight: Bold ;
-  font-size: 42px;;
+.brandlogo {
+  font-family: "Expletus Sans", cursive;
+  font-weight: Bold;
+  font-size: 42px;
 }
 
-.brandlogos{
-  font-family:'Expletus Sans', cursive;
+.brandlogos {
+  font-family: 'Expletus Sans', cursive;
   font-weight: 400;
   font-size: 30px;
   font-style: italic;
 }
-
 </style>

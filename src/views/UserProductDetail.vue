@@ -1,4 +1,5 @@
 <template>
+  <Loading :active="isLoading"></Loading>
   <h2>單一產品</h2>
   <div class="container">
     <div class="row align-items-center">
@@ -88,12 +89,21 @@
               </div>
             </div>
           </div>
-          <div class="col-6">
+          <!-- <div class="col-6">
             <a
-              href="./checkout.html"
+              href="./Orders.html"
               class="text-nowrap btn btn-dark w-100 py-2"
               >放入購物車</a
             >
+          </div> -->
+          <div class="col-6">
+          <button
+            type="button"
+            class="btn btn-outline-secondary rounded-0 border"
+            @click="addCart(product.id)"
+          >
+            加到購物車
+          </button>
           </div>
         </div>
       </div>
@@ -128,11 +138,15 @@
     </div>
   </div>
 </template>
+
 <script>
+import emitter from '../methods/emitter';
+
 export default {
   data() {
     return {
       product: [],
+      isLoading: false,
     };
   },
   methods: {
@@ -140,14 +154,27 @@ export default {
       // $route 物件取值
       // $router 方法
       const { id } = this.$route.params; // 這裡要用解構 airbnb 規則
+      this.isLoading = true;
       this.$http(`${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/product/${id}`)
         .then((res) => {
           console.log(res);
+          this.isLoading = false;
           this.product = res.data.product; // 賦值
         })
         .catch((err) => {
           console.dir(err.response.data.message);
         });
+    },
+    addCart(id) {
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/cart`;
+      const cart = {
+        product_id: id,
+        qty: 1,
+      };
+      this.$http.post(url, { data: cart }).then((res) => {
+        console.log(res);
+        emitter.emit('update-cart'); // 更新購物車數量
+      });
     },
   },
   mounted() {
