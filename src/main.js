@@ -1,5 +1,6 @@
 import { createApp } from 'vue';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import $ from 'jquery';
 import AOS from 'aos';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
@@ -11,6 +12,8 @@ import router from './router';
 import { currency, date } from './methods/filters';
 import $httpMessageState from './methods/pushMessageState';
 import 'aos/dist/aos.css';
+
+window.$ = $;
 
 const app = createApp(App);
 app.config.globalProperties.$filters = {

@@ -174,48 +174,67 @@
       </div>
     </div>
     <swiper :slides-per-view="1" :space-between="50" class="mySwiper">
-    <swiper-slide v-for="item in products" :key="item.id">
-      <div
-        style="
-          height: 300px;
-          background-position: center center;
-          background-size: cover;
-        "
-        :style="{ backgroundImage: `url(${item.imageUrl})` }"
-      ></div>
-    </swiper-slide>
-  </swiper>
+      <swiper-slide v-for="item in products" :key="item.id">
+        <div
+          style="
+            height: 300px;
+            background-position: center center;
+            background-size: cover;
+          "
+          :style="{ backgroundImage: `url(${item.imageUrl})` }"
+        ></div>
+      </swiper-slide>
+    </swiper>
 
-  <section class="intro bg-light pt-10 pt-lg-18 pb-14 pb-lg-18">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-12 col-md-6 col-lg-6  mb-2">
-        <h3 class="fs-lg-3 text-secondary text-md-center text-lg-start fw-medium mb-1">精心設計、課程多元</h3>
-        <p class="text-primary fs-5 mb-md-7">教師帶領多元課程，釋放壓力，與身心常見的緊繃不適溫柔和解。</p>
-        <a class="btn-hover-opacity text-secondary" href="./surroungings.html">課程介紹 </a>
-        <!-- <span class=" text-secondary material-icons">
+    <section class="intro bg-light pt-10 pt-lg-18 pb-14 pb-lg-18">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-12 col-md-6 col-lg-6 mb-2">
+            <h3
+              class="
+                fs-lg-3
+                text-secondary text-md-center text-lg-start
+                fw-medium
+                mb-1
+              "
+            >
+              精心設計、課程多元
+            </h3>
+            <p class="text-primary fs-5 mb-md-7">
+              教師帶領多元課程，釋放壓力，與身心常見的緊繃不適溫柔和解。
+            </p>
+            <a
+              class="btn-hover-opacity text-secondary"
+              href="./surroungings.html"
+              >課程介紹
+            </a>
+            <!-- <span class=" text-secondary material-icons">
           arrow_right_alt
         </span> -->
-      </div>
-      <div class="col-12 col-md-6 col-lg-6">
-        <swiper class="swiper mySwiper">
-            <swiper-slide  class="ratio ratio-1x1" v-for="item in products" :key="item.id">
-              <div
-                style="
-                  height: 300px;
-                  background-position: center center;
-                  background-size: cover;
-                "
-                :style="{ backgroundImage: `url(${item.imageUrl})` }"
-              ></div>
-              <!-- <a href="#"><img src="" class="img-hover h-100 card-img"
+          </div>
+          <div class="col-12 col-md-6 col-lg-6">
+            <swiper class="swiper mySwiper">
+              <swiper-slide
+                class="ratio ratio-1x1"
+                v-for="item in products"
+                :key="item.id"
+              >
+                <div
+                  style="
+                    height: 300px;
+                    background-position: center center;
+                    background-size: cover;
+                  "
+                  :style="{ backgroundImage: `url(${item.imageUrl})` }"
+                ></div>
+                <!-- <a href="#"><img src="" class="img-hover h-100 card-img"
                   alt="yoga"></a> -->
-            </swiper-slide >
-        </swiper>
+              </swiper-slide>
+            </swiper>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
     <div class="container my-7 mb-4">
       <div class="row">
         <div class="col-md-6 g-0">
@@ -304,42 +323,88 @@
     </div> -->
   </section>
   <div class="bg-secondary text-white py-2 py-md-5">
-  <div class="container px-6 px-md-9">
-    <ul class="row list-unstyled gx-md-9">
-      <li class="col-md-4 mb-5 mb-md-0 py-2">
-        <div class="d-flex d-md-column flex-md-column flex-lg-row align-items-center justify-content-center justify-content-lg-center aos-animate" data-aos="fade-up" data-aos-duration="4000" data-aos-delay="2">
-          <i class="bi bi-cart3 mb-md-3 mb-lg-0 display-5"></i>
-          <div class="ms-4 ms-md-0 ms-lg-4 text-md-center text-lg-start">
-            <h3 class="h5">Free</h3>
-            <p class="mb-0">所有會員滿 $1000 免運</p>
+    <div class="container px-6 px-md-9">
+      <ul class="row list-unstyled gx-md-9">
+        <li class="col-md-4 mb-5 mb-md-0 py-2">
+          <div
+            class="
+              d-flex d-md-column
+              flex-md-column flex-lg-row
+              align-items-center
+              justify-content-center justify-content-lg-center
+              aos-animate
+            "
+            data-aos="fade-up"
+            data-aos-duration="4000"
+            data-aos-delay="2"
+          >
+            <i class="bi bi-cart3 mb-md-3 mb-lg-0 display-5"></i>
+            <div class="ms-4 ms-md-0 ms-lg-4 text-md-center text-lg-start">
+              <h3 class="h5">Free</h3>
+              <p class="mb-0">所有會員滿 $1000 免運</p>
+            </div>
           </div>
-        </div>
-      </li>
-      <li class="col-md-4 mb-5 mb-md-0 py-2">
-        <div class="d-flex d-md-column flex-md-column flex-lg-row align-items-center justify-content-center  justify-content-lg-center aos-animate" data-aos="fade-up" data-aos-duration="4000" data-aos-delay="2">
-           <i class="bi bi-gift mb-md-3 mb-lg-0 display-5"></i>
-          <div class="ms-4 ms-md-0 ms-lg-4 text-md-center text-lg-start">
-            <h3 class="h5">Bonus</h3>
-            <p class="mb-0">立即享新客戶優惠折扣碼</p>
+        </li>
+        <li class="col-md-4 mb-5 mb-md-0 py-2">
+          <div
+            class="
+              d-flex d-md-column
+              flex-md-column flex-lg-row
+              align-items-center
+              justify-content-center justify-content-lg-center
+              aos-animate
+            "
+            data-aos="fade-up"
+            data-aos-duration="4000"
+            data-aos-delay="2"
+          >
+            <i class="bi bi-gift mb-md-3 mb-lg-0 display-5"></i>
+            <div class="ms-4 ms-md-0 ms-lg-4 text-md-center text-lg-start">
+              <h3 class="h5">Bonus</h3>
+              <p class="mb-0">立即享新客戶優惠折扣碼</p>
+            </div>
           </div>
-        </div>
-      </li>
-      <li class="col-md-4 mb-5 mb-md-0 py-2">
-        <div class="d-flex d-md-column flex-md-column flex-lg-row align-items-center justify-content-center  justify-content-lg-center aos-animate" data-aos="fade-up" data-aos-duration="4000" data-aos-delay="2">
-           <i class="bi bi-credit-card mb-md-3 mb-lg-0 display-5"></i>
-          <div class="ms-4 ms-md-0 ms-lg-4 text-md-center text-lg-start">
-            <h3 class="h5 text-nowrap">Payment Method</h3>
-            <p class="mb-0">多元支付方式</p>
+        </li>
+        <li class="col-md-4 mb-5 mb-md-0 py-2">
+          <div
+            class="
+              d-flex d-md-column
+              flex-md-column flex-lg-row
+              align-items-center
+              justify-content-center justify-content-lg-center
+              aos-animate
+            "
+            data-aos="fade-up"
+            data-aos-duration="4000"
+            data-aos-delay="2"
+          >
+            <i class="bi bi-credit-card mb-md-3 mb-lg-0 display-5"></i>
+            <div class="ms-4 ms-md-0 ms-lg-4 text-md-center text-lg-start">
+              <h3 class="h5 text-nowrap">Payment Method</h3>
+              <p class="mb-0">多元支付方式</p>
+            </div>
           </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
+  <div class="hd">
+    <div id="darkBack"></div>
+    <div id="popUp">
+      <div id="close" class="close"></div>
+      <div id="new"><span>新品上市</span></div>
+      <h2>WFH居家必備，年度鉅獻</h2>
 
+      <br />
+      <a href="#" target="_blank" class="nav-link link-light newbtn">大家都在買</a>
+    </div>
+
+    <div id="plus"><span>新品上市</span></div>
+  </div>
 </template>
 
 <script>
+/* global $ */
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue';
@@ -376,6 +441,24 @@ export default {
   //   this.$router.push(`/product/${id}`);
   // },
   mounted() {
+    $(document).scroll(() => {
+      const scroll = $(this).scrollTop();
+      if (scroll >= 150) {
+        $('#popUp').css('margin-left', '-425px');
+        $('#plus').css('margin-left', '0px');
+      } else {
+        $('#plus').css('margin-left', '0px');
+        $('#popUp').css('margin-left', '-425px');
+      }
+    });
+    $('#plus').click(() => {
+      $('#popUp').css('margin-left', '0px');
+      $('#plus').css('margin-left', '-425px');
+    });
+    $('#close').click(() => {
+      $('#popUp').css('margin-left', '-425px');
+      $('#plus').css('margin-left', '0px');
+    });
     this.getProducts();
     AOS.init();
     console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH);
@@ -393,9 +476,125 @@ export default {
 }
 
 .brandlogos {
-  font-family: 'Expletus Sans', cursive;
+  font-family: "Expletus Sans", cursive;
   font-weight: 400;
   font-size: 30px;
   font-style: italic;
+}
+
+a {
+  text-decoration: none;
+}
+
+.hd {
+  background-size: cover;
+  background-position: center;
+  height: 0 auto;
+  width: 100%;
+}
+
+#popUp {
+  position: fixed;
+  max-width: 350px;
+  height: 200px;
+  margin-bottom: 100px;
+  background: rgba(236, 240, 241, 1);
+  /*   border: 7px solid #fff; */
+  bottom: 0;
+  margin-left: 0;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+  z-index: 1000;
+}
+
+#new span {
+  background: #ee847d;
+  position: absolute;
+  color: #FFF;
+  padding: 4px 10px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-top: -15px;
+}
+
+#popUp .close {
+  color: #464646;
+  right: 10px;
+  top: 8px;
+  position: absolute;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#popUp h2 {
+  font-size: 16px;
+  color: #464646;
+  line-height: 16px;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 50px;
+  padding: 0 20px;
+  margin-bottom: 10px;
+}
+
+.newbtn {
+  margin: 0 auto;
+  text-align: center;
+  right: 0;
+  left: 0;
+  position: absolute;
+  width: 120px;
+  font-size: 15px;
+  color: #fff;
+  border-bottom: 2px solid #18729f;
+  background: #236f6b;
+  border-radius: 4px;
+  padding: 10px 0;
+}
+
+#plus {
+  position: fixed;
+  color: #fff;
+  bottom: 15%;
+  font-size: 15px;
+  margin-left: -425px;
+  -webkit-transition: all 1.25s ease;
+  -moz-transition: all 1.25s ease;
+  -o-transition: all 1.25s ease;
+  transition: all 1.25s ease;
+  cursor: pointer;
+  text-align: left;
+  letter-spacing: 5px;
+  z-index: 1000;
+}
+
+#plus span {
+  position: absolute;
+  margin-top: 26px;
+  left: 8px;
+  letter-spacing: 5px;
+  line-height: 25px;
+}
+
+#plus::after {
+  content: "";
+  display: block;
+  display: relative;
+  border-top: 90px solid #236f6b;
+  border-bottom: 50px solid #236f6b;
+  border-left: 40px solid #236f6b;
+  border-radius: 0px 10px 10px 0;
+}
+
+@media all and (max-width: 900px) {
+  #popUp {
+    margin-left: -425px;
+  }
+  #plus {
+    margin-left: 0px;
+  }
 }
 </style>
