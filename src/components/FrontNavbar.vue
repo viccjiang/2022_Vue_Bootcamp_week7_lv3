@@ -74,22 +74,23 @@
       </div>
     </div>
   </nav>
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas offcanvas-end" ref="offcanvas" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class=" bg-primary offcanvas-header text-white">
     <h5 id="offcanvasRightLabel " class="text-center m-0">購物車</h5>
     <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
+  <div v-if="cartData.carts.length >0">
   <div class="offcanvas-body d-flex flex-column justify-content-between">
     <div class="container">
     <div class="row  border-bottom mb-3 " v-for="item in cartData.carts" :key="item.id">
       <div class="col-2 d-flex flex-column align-items-center justify-content-center" >
         <p
           type=""
-          class="btn btn-sm text-danger text-start m-0"
+          class="btn btn-sm text-secondary text-start m-0"
           :disabled="loadingItem === item.id"
           @click="removeCartItem(item.id)"
         >
-          <i class="bi bi-x"></i>
+          <i class="bi bi-trash3"></i>
         </p>
       </div>
       <div
@@ -106,24 +107,24 @@
       <div class="col d-flex flex-column fs-6 fw-bold align-items-start justify-content-center" >
         {{item.product.title}}
       </div>
-      <div class="border-top d-flex justify-content-center">
+      <div class="border-top d-flex justify-content-center bg-light">
       <div class="col d-flex flex-column ms-auto " >
         <div
           class="price d-flex justify-content-md-between flex-column flex-nowrap flex-md-row "
         >
           <!-- 數量 -->
           <div
-            class="input-group product-num-group bg-light mt-1 mb-4 my-md-0"
+            class="input-group product-num-group bg-light mt-1 mb-4 my-md-0 "
           >
             <!-- 減 -->
             <div class="">
               <button
                 :disabled="item.qty <= 1 || loadingItem === item.id"
                 @click="updateCart(item, item.qty--)"
-                class="btn border-0 "
+                class="btn border-0 bg-light"
                 type="button"
               >
-                <i class="bi bi-dash-lg"></i>
+                <i class="bi bi-dash-lg bg-light"></i>
               </button>
             </div>
             <!-- 數量 -->
@@ -147,16 +148,27 @@
           </div>
           </div>
       </div>
-      <div class="col d-flex flex-column ms-auto text-end fw-bold fs-5 text-danger align-items-end justify-content-center" >
+      <div class="col d-flex flex-column ms-auto text-end  fs-7 text-secondary align-items-end justify-content-center" >
         ${{item.final_total}}
       </div>
       </div>
     </div>
     </div>
-    <p class="text-center m-0 fs-5 text-danger fw-bold">總計 $ {{cartData.final_total}} 元 </p>
-    <router-link class="nav-link p-0 d-grid" to="/cart"><button class=" btn btn-primary text-center m-0">結帳去</button></router-link>
+    <p class="text-center m-0 fs-6 text-danger mb-3">總計 $ {{cartData.final_total}} 元 </p>
+    <router-link class="nav-link p-0 d-grid " to="/cart"><button class=" btn btn-primary text-center m-0">結帳去</button></router-link>
     <!-- {{ cartData.carts }} -->
   </div>
+  </div>
+  <div v-else class="offcanvas-body d-flex flex-column align-items-center justify-content-center">
+  <div  class="text-center d-flex flex-column align-items-center justify-content-center">
+    <p class="m-0 ">你的購物車沒有商品</p>
+    <div class="d-flex align-items-center justify-content-center">
+      <router-link to="/"><button type="button" class="btn btn-outline-secondary m-2">回首頁</button></router-link>
+      <router-link to="products"><button type="button" class="btn btn-outline-secondary">購物去</button></router-link>
+    </div>
+  </div>
+  </div>
+
 </div>
 </template>
 
