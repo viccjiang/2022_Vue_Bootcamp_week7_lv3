@@ -30,7 +30,7 @@
         </ul>
         <ul class="navbar-nav d-flex align-items-center flex-column flex-lg-row">
           <div class="position-relative">
-            <a href="#" class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+            <a href="#" class="nav-link"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
               <i class="bi bi-bag text-secondary"></i>
               <div
                 class="
@@ -74,7 +74,8 @@
       </div>
     </div>
   </nav>
-  <div class="offcanvas offcanvas-end" ref="offcanvas" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <!-- data-bs-scroll="true"  data-bs-backdrop="false" -->
+  <div class="offcanvas offcanvas-end" ref="offcanvas"  data-bs-scroll="true" data-bs-backdrop="false" style="overflow: auto" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class=" bg-primary offcanvas-header text-white">
     <h5 id="offcanvasRightLabel " class="text-center m-0">購物車</h5>
     <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -155,7 +156,7 @@
     </div>
     </div>
     <p class="text-center m-0 fs-6 text-danger mb-3">總計 $ {{cartData.final_total}} 元 </p>
-    <router-link class="nav-link p-0 d-grid " to="/cart"><button class=" btn btn-primary text-center m-0">結帳去</button></router-link>
+    <router-link class="nav-link text-white p-0 d-grid btn btn-primary text-center m-0 p-3" to="/cart" @click="hideOff">結帳去</router-link>
     <!-- {{ cartData.carts }} -->
   </div>
   </div>
@@ -173,6 +174,7 @@
 </template>
 
 <script>
+import Offcanvas from 'bootstrap/js/dist/offcanvas';
 import emitter from '../methods/emitter';
 
 export default {
@@ -182,6 +184,7 @@ export default {
       cartData: {
         carts: [],
       },
+      offcanvas: '',
     };
   },
   methods: {
@@ -234,12 +237,19 @@ export default {
         emitter.emit('update-cart'); // 更新購物車數量
       });
     },
+    showOff() {
+      this.offcanvas.show();
+    },
+    hideOff() {
+      this.offcanvas.hide();
+    },
   },
   mounted() {
     this.getCarts();
     emitter.on('update-cart', () => {
       this.getCarts();
     });
+    this.offcanvas = new Offcanvas(this.$refs.offcanvas);
   },
 };
 </script>
