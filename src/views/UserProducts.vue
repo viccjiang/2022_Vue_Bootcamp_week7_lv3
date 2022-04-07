@@ -7,6 +7,12 @@
         <div class="list-group rounded-0">
           <a
             href="#"
+            class="list-group-item list-group-item-action"
+            @click.prevent="selectCategory = ''; this.$route.params.selectCategory = ''"
+            >全部</a
+          >
+          <a
+            href="#"
             v-for="item in categories"
             :key="item"
             class="list-group-item list-group-item-action"
@@ -107,8 +113,8 @@
           </div>
           <!-- 分頁 -->
           <Pagination
-            :pages="pagination"
-            @emit-pages="getProducts"
+            :pagination="pagination"
+            @change-page="getProducts"
           ></Pagination>
         </div>
       </div>
@@ -134,9 +140,10 @@ const storageMethods = {
 export default {
   data() {
     return {
+      isLoading: false,
       products: [],
       product: {},
-      pagination: {},
+      pagination: '',
       status: {
         loadingItem: '', // 對應品項 id
       },
@@ -166,19 +173,52 @@ export default {
       // storageMethods.save(this.myFavorite);
     },
     getProducts(page = 1) {
-      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/?page=${page}`;
       this.isLoading = true;
-      this.$http.get(url).then((response) => {
-        this.products = response.data.products;
-        console.log('products:', response);
-        this.isLoading = false;
-        if (response.data.success) {
-          console.log(response.data);
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`;
+      this.$http.get(url)
+        .then((response) => {
+          if (!response.data.success) {
+            this.isLoading = false;
+            return;
+          }
           this.products = response.data.products;
-          this.pagination = response.data.pagination;
+          console.log('取得全部', this.products);
           this.getCategories();
-        }
-      });
+          console.log(this.selectCategory);
+          const { selectCategory } = this.$route.params;
+          if (selectCategory) {
+            this.selectCategory = selectCategory;
+          }
+          if (this.selectCategory !== '') {
+            this.pagination = {};
+          } else {
+            this.setPagination(page);
+          }
+          this.isLoading = false;
+        })
+        .catch((error) => {
+          this.$httpMessageState(error, '連線錯誤');
+          this.isLoading = false;
+        });
+    },
+    setPagination(page = 1) {
+      const perPage = 12;
+      this.pagination = {
+        total_pages: Math.ceil(this.products.length / perPage),
+        current_page: page,
+        has_pre: page !== 1,
+        has_next: false,
+        category: null,
+      };
+      if (this.pagination.current_page >= this.pagination.total_pages) {
+        this.pagination.current_page = this.pagination.total_pages;
+        this.pagination.has_next = false;
+      } else {
+        this.pagination.has_next = true;
+      }
+      const minPage = (this.pagination.current_page * perPage) - perPage;
+      const maxPage = (this.pagination.current_page * perPage);
+      this.products = this.products.slice(minPage, maxPage);
     },
     getCategories() {
       // Vue 3 雙向綁定 Proxy(new Proxy 物件)
@@ -207,6 +247,11 @@ export default {
     },
   },
   watch: {
+    selectCategory(newValue, preValue) {
+      if (newValue === '' || preValue === '') {
+        this.getProducts();
+      }
+    },
     myFavorite: {
       // 深層監聽
       handler() {
@@ -222,8 +267,9 @@ export default {
       // 空字串，或任何符合結果都會是 “真值”
     },
   },
-  created() {
+  mounted() {
     // 改為 mounted
+    this.$http.defaults.baseURL = process.env.VUE_APP_API;
     this.getProducts();
   },
 };
