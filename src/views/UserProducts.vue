@@ -9,7 +9,7 @@
             href="#"
             class="list-group-item list-group-item-action"
             @click.prevent="selectCategory = ''; this.$route.params.selectCategory = ''"
-            >全部</a
+            >全部 </a
           >
           <a
             href="#"
@@ -113,8 +113,8 @@
           </div>
           <!-- 分頁 -->
           <Pagination
-            :pagination="pagination"
-            @change-page="getProducts"
+            :pages="pagination"
+            @update-page="getProducts"
           ></Pagination>
         </div>
       </div>
@@ -184,7 +184,7 @@ export default {
           this.products = response.data.products;
           console.log('取得全部', this.products);
           this.getCategories();
-          console.log(this.selectCategory);
+          console.log('取得分類', this.selectCategory);
           const { selectCategory } = this.$route.params;
           if (selectCategory) {
             this.selectCategory = selectCategory;
@@ -269,7 +269,7 @@ export default {
   },
   mounted() {
     // 改為 mounted
-    this.$http.defaults.baseURL = process.env.VUE_APP_API;
+    // this.$http.defaults.baseURL = process.env.VUE_APP_API;
     this.getProducts();
   },
 };
