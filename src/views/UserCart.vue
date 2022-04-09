@@ -23,9 +23,17 @@
       </div>
     </div>
   </div>
-  <div class="container mt-0 mt-md-10" v-if="cartData.carts">
+  <div class="container mt-2 mt-md-10" v-if="cartData.carts">
     <div class="row">
       <div class="col">
+        <!-- 清除全部購物車 -->
+        <button
+            type="button"
+            class="btn btn-outline-danger btn-sm mb-2 "
+            @click="removeCart()"
+          >
+            <i class="bi bi-trash"> 清除全部購物車 </i>
+        </button>
         <div
           class="card pt-2 border-top mb-3 border-0"
           v-for="item in cartData.carts"
@@ -162,12 +170,11 @@
               </p>
             </div>
           </div>
-          <!-- <div class="text-end"> 原價 {{$filters.currency (item.product.price)}} </div> -->
+          <div class="text-end"> 定價 {{$filters.currency (item.product.price)}} </div>
           <!-- <small v-if="cartData.final_total !== cartData.total" class="text-success text-end"
             >折扣價：{{ $filters.currency(item.final_total) }}
           </small> -->
           <div
-            v-if="cartData.final_total !== cartData.total"
             class="
               mt-2
               text-end
