@@ -23,7 +23,7 @@
       </div>
     </div>
   </div>
-  <div class="container mt-2 mt-md-10" v-if="cartData.carts">
+  <div class="container mt-2 mt-md-10" v-if="cartData.carts.length > 0">
     <div class="row">
       <div class="col">
         <!-- 清除全部購物車 -->
