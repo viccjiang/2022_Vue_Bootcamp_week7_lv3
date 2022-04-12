@@ -64,6 +64,8 @@
               "
             >
               <div class="card-body p-0">
+                <!-- 傳入產品唯一值 item.product.id -->
+                <a href="#" @click.prevent="getProduct(item.product.id)">產品連結</a>
                 <h5 class="card-title fs-6 fw-bold text-soft m-0">
                   {{ item.product.title }}
                 </h5>
@@ -609,6 +611,11 @@ export default {
     return {
       emitter,
     };
+  },
+  watch: {
+    $route() {
+      this.$router.go(0);
+    },
   },
   methods: {
     getProducts() {
