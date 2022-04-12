@@ -30,7 +30,8 @@
         </ul>
         <ul class="navbar-nav d-flex align-items-center flex-column flex-lg-row">
           <div class="position-relative">
-            <a href="#" class="nav-link"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+            <!-- <a href="#" class="nav-link"  data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"> -->
+              <a href="" class="nav-link" @click.prevent="showOff">
               <i class="bi bi-bag text-secondary"></i>
               <div
                 class="
