@@ -37,6 +37,11 @@ const routes = [
         component: () => import('../views/UserCheckOrder.vue'),
       },
       {
+        path: 'query',
+        name: 'query',
+        component: () => import('../views/UserOrderQuery.vue'),
+      },
+      {
         path: 'swiper',
         component: () => import('../views/SwiperTest.vue'),
       },

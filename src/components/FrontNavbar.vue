@@ -27,6 +27,9 @@
           <li class="nav-item">
             <router-link class="nav-link" to="/cart">購物車</router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" to="/query">查詢訂單</router-link>
+          </li>
         </ul>
         <ul class="navbar-nav d-flex align-items-center flex-column flex-lg-row">
           <div class="position-relative">

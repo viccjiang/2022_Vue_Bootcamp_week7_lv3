@@ -37,7 +37,8 @@
             <dd class="col-sm-9 ">{{ $filters.date(order.create_at)}}</dd>
             <dt class="col-sm-3">訂單編號</dt>
             <dd class="col-sm-9">
-                <p class="m-0">{{order.id}}</p>
+                <p class="m-0"  id="coupon_save">{{order.id}}</p>
+                <button @click="copyCouponCode" class="btn btn-outline-soft ms-3 btn-sm" id="coupon_btn">複製訂單編號</button>
             </dd>
             <dt class="col-sm-3 ">Email</dt>
             <dd class="col-sm-9">{{ order.user.email }}</dd>
@@ -88,7 +89,8 @@
             <dd class="col-sm-9 ">{{ $filters.date(order.create_at)}}</dd>
             <dt class="col-sm-3">訂單編號</dt>
             <dd class="col-sm-9">
-                <p class="m-0">{{order.id}}</p>
+                <p class="m-0"  id="coupon_save">{{order.id}}</p>
+                <button @click="copyCouponCode" class="btn btn-outline-soft ms-3 btn-sm" id="coupon_btn">複製訂單編號</button>
             </dd>
             <dt class="col-sm-3 ">Email</dt>
             <dd class="col-sm-9">{{ order.user.email }}</dd>
@@ -240,11 +242,34 @@ export default {
         }
       });
     },
+    copyCouponCode() {
+      // 舊的寫法已淘汰 execCommand
+      // const range = document.createRange();
+      // range.selectNode(document.getElementById('content'));
+      // const selection = window.getSelection();
+      // if (selection.rangeCount > 0) selection.removeAllRanges();
+      // selection.addRange(range);
+      // document.execCommand('copy');
+      // this.showAlert();
+      // console.log('複製成功！');
+      // 新的寫法 navigator.clipboard
+      const select = (DOM) => document.querySelector(DOM);
+      select('#coupon_btn').addEventListener('click', () => {
+        navigator.clipboard.writeText(select('#coupon_save').textContent);
+        // console.log(select('#coupon_save').textContent);
+        console.log('複製成功');
+      });
+    },
   },
-  created() {
+  mounted() {
+    this.copyCouponCode();
+    emitter.emit('queryOrder', this.orderId);
     this.orderId = this.$route.params.orderId;
     console.log(this.orderId);
     this.getOrder();
+  },
+  updated() {
+    this.copyCouponCode();
   },
 };
 </script>
