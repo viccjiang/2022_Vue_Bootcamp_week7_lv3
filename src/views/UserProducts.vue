@@ -4,6 +4,12 @@
     <div class="row">
       <!-- 左側分類欄 -->
       <div class="col-3 mt-4">
+      <!-- 查詢商品 -->
+      <div class="form-floating">
+        <input type="text" class="form-control mb-3" id="search" placeholder="Search" v-model="cacheSearch">
+        <label class="text-secondary" for="search">查詢商品</label>
+      </div>
+        <!-- 左側分類欄 -->
         <div class="list-group rounded-0">
           <a
             href="#"
@@ -26,6 +32,94 @@
         <div class="row mt-4">
           <div class="col mb-4">
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+              <!-- 如果有查詢商品-->
+              <template v-if="cacheSearch">
+                <div class="col" v-for="item in filterSearch" :key="item.id">
+                <div class="card h-100 rounded-0">
+                  <a
+                    href="#"
+                    class="rounded-0 "
+                    @click.prevent="getProduct(item.id)"
+                  >
+                    <div
+                      style="
+                        height: 300px;
+                        background-size: cover;
+                        background-position: center;
+                      "
+                      :style="{ backgroundImage: `url(${item.imageUrl})` }"
+                    ></div>
+                  </a>
+                  <!-- <img :src="item.imageUrl" class="card-img-top" alt="..." /> -->
+                  <div class="card-body">
+                    <span class="badge bg-secondary text-light mb-2">{{
+                      item.category
+                    }}</span>
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <h6 class="h6 text-secondary">
+                      {{ item.description }}
+                    </h6>
+
+                    <div class="h5 list-inline-item" v-if="!item.price">
+                      {{ item.origin_price }} 元
+                    </div>
+                    <del
+                      class="h6 list-inline-item text-secondary mt-4"
+                      v-if="item.price"
+                      >原價 NT$
+                      {{ $filters.currency(item.origin_price) }} 元</del
+                    >
+                    <div class="h5 text-danger mb-3" v-if="item.price">
+                      NT$ {{ $filters.currency(item.price) }} 元
+                    </div>
+                    <!-- 按鈕 -->
+                    <div class="d-grid gap-2 col-12 mx-auto">
+                      <!-- 加入購物車 -->
+                      <button
+                        type="button"
+                        class="btn btn-outline-secondary rounded-0 border"
+                        :disabled="this.status.loadingItem === item.id"
+                        @click="addCart(item.id)"
+                      >
+                        <div
+                          v-if="this.status.loadingItem === item.id"
+                          class="spinner-border text-danger spinner-border-sm"
+                          role="status"
+                        >
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                        加到購物車
+                      </button>
+                      <!-- 我的最愛 -->
+                      <button
+                        type="button"
+                        @click="addMyFavorite(item)"
+                        :class="{ active: myFavorite.includes(item.id) }"
+                        class="
+                          btn
+                          d-block
+                          btn-outline-secondary
+                          rounded-0
+                          border
+                        "
+                      >
+                        加到我的最愛
+                      </button>
+                      <!-- 查看細節 -->
+                      <button
+                        type="button"
+                        class="btn btn-outline-secondary rounded-0 border"
+                        @click="getProduct(item.id)"
+                      >
+                        查看更多
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </template>
+              <!-- 如果沒有查詢商品-->
+              <template v-else>
               <div class="col" v-for="item in filterProducts" :key="item.id">
                 <div class="card h-100 rounded-0">
                   <a
@@ -109,6 +203,7 @@
                   </div>
                 </div>
               </div>
+              </template>
             </div>
           </div>
           <!-- 分頁 -->
@@ -140,6 +235,7 @@ const storageMethods = {
 export default {
   data() {
     return {
+      cacheSearch: '', // 搜尋輸入
       isLoading: false,
       products: [],
       product: {},
@@ -265,6 +361,15 @@ export default {
     filterProducts() {
       return this.products.filter((item) => item.category.match(this.selectCategory));
       // 空字串，或任何符合結果都會是 “真值”
+    },
+    // 查詢商品
+    filterSearch() {
+      /* 篩選與渲染
+       *  .filter → 陣列內容篩選與條件相符並產生新陣列。
+       *  .match → 找出內容有匹配的資料。
+       *  當 cacheSearch 無資料時，輸出與 products 一樣的陣列，
+       *  當 cacheSearch 有資料時，輸出與 products 有相符的資料。 */
+      return this.products.filter((item) => item.title.match(this.cacheSearch));
     },
   },
   mounted() {
