@@ -6,7 +6,7 @@
       <div class="col-3 mt-4">
       <!-- 查詢商品 -->
       <div class="form-floating">
-        <input type="text" class="form-control mb-3" id="search" placeholder="Search" v-model="cacheSearch">
+        <input type="text" class="form-control mb-3" id="search" placeholder="Search" v-model.lazy="cacheSearch">
         <label class="text-secondary" for="search">查詢商品</label>
       </div>
         <!-- 左側分類欄 -->
@@ -347,6 +347,12 @@ export default {
       if (newValue === '' || preValue === '') {
         this.getProducts();
       }
+    },
+    cacheSearch() {
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/products/all`;
+      this.$http.get(url).then((response) => {
+        this.products = response.data.products;
+      });
     },
     myFavorite: {
       // 深層監聽
