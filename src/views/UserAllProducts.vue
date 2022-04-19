@@ -27,6 +27,12 @@
             @click.prevent="getCategory('椅子')"
             >椅子</a
           >
+          <a
+            href="#"
+            class="list-group-item list-group-item-action"
+            @click.prevent="getCategory('桌子')"
+            >桌子</a
+          >
         </div>
       </div>
       <!-- 右側產品列 -->
@@ -261,7 +267,6 @@ export default {
   //   //   return this.products.filter((item) => item.category.match(this.selectCategory));
   //   //   // 空字串，或任何符合結果都會是 “真值”
   //   // },
-  //   // 查詢商品
   // },
   mounted() {
     // 改為 mounted
