@@ -186,6 +186,36 @@
                   </label>
                 </div>
               </div>
+              <div class="mb-3">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    v-model="tempProduct.is_new_product"
+                    :true-value="1"
+                    :false-value="0"
+                    id="is_new_product"
+                  />
+                  <label class="form-check-label" for="is_new_product">
+                    新品標籤啟用
+                  </label>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    v-model="tempProduct.is_hot"
+                    :true-value="1"
+                    :false-value="0"
+                    id="is_is_hot"
+                  />
+                  <label class="form-check-label" for="is_is_hot">
+                    熱銷標籤啟用
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
